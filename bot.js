@@ -1,10 +1,13 @@
 const Discord = require('discord.js');
 const auth = require('./auth.json');
 const fs = require("fs");
-const client = new Discord.Client({disableEveryone: true});
-client.commands = new Discord.Collection();
+
+//import stats from ('./json/stats.json');
 
 const prefix = "+";
+
+const client = new Discord.Client({disableEveryone: true});
+client.commands = new Discord.Collection();
 
 // To prevent overloading bot.
 let isReady = true;
@@ -44,6 +47,29 @@ client.on("message", async message => {
     if (message.content.indexOf(prefix) !== 0) {
         return;
     }
+
+    /*if (!stats[message.author.id]) {
+        stats[message.author.id] = {
+            coins: 0,
+            experience: 0
+        };
+    }
+
+    let coinAmt = Math.floor(Math.random() * 1) + 1;
+    let baseAmt = Math.floor(Math.random() * 1) + 1;
+    console.log(coinAmt + " : " + baseAmt);
+
+    if (coinAmt === baseAmt) {
+        stats[message.author.id] = {
+            coins: stats[message.author.id].coins + coinAmt
+        };
+
+        fs.writeFile("./json/stats.json", JSON.stringify(stats), (err) => {
+            if (err) {
+                console.log(err);
+            }
+        });
+    }*/
 
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     //const command = args.shift().toLowerCase();
